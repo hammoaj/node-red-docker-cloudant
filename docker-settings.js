@@ -121,7 +121,8 @@ var settings = {
     // When httpAdminRoot is used to move the UI to a different root path, the
     // following property can be used to identify a directory of static content
     // that should be served at http://localhost:1880/.
-    httpStatic: path.join(baseDir, "public"),
+    //httpStatic: path.join(baseDir, "public"),
+    httpStatic: "./public",
 
     // The maximum size of HTTP request that will be accepted by the runtime api.
     // Default: 5mb
@@ -136,50 +137,14 @@ var settings = {
     // To password protect the Node-RED editor and admin API, the following
     // property can be used. See http://nodered.org/docs/security.html for details.
     
-    adminAuth: {
-        type: "credentials",
-        users: [{
-            username: process.env.NODE_RED_USERNAME,
-            password: process.env.NODE_RED_PASSWORD,
-            permissions: "*"
-        }]
-    },
-
-    /*
-    adminAuth: {
-        type:"strategy",
-        strategy: {
-            name: "openidconnect",
-            label: 'Sign in with w3id',
-            icon:"fa-key",
-            strategy: require("passport-idaas-openidconnect").IDaaSOIDCStrategy,
-            options: {
-                clientID: process.env.OIDC_CLIENT_ID,
-                clientSecret: process.env.OIDC_CLIENT_SECRET,
-                authorizationURL: 'https://w3id.alpha.sso.ibm.com/isam/oidc/endpoint/amapp-runtime-oidcidp/authorize',
-                tokenURL: 'https://w3id.alpha.sso.ibm.com/isam/oidc/endpoint/amapp-runtime-oidcidp/token',
-                scope: 'email',
-                response_type: 'code',
-                callbackURL: 'https://nr.dal1a.ciocloud.nonprod.intranet.ibm.com/red/auth/strategy/callback',
-                skipUserProfile: true,
-                addCACert: true,
-                CACertPathList: ['/oidc_w3id_staging.cer'],
-                issuer: 'https://w3id.alpha.sso.ibm.com/isam',
-                verify: function(iss, sub, profile, accessToken, refreshToken, params, done) {
-                    process.nextTick(function() {
-                        profile.accessToken = accessToken;
-                        profile.refreshToken = refreshToken;
-                        done(null, profile);
-                    })      
-                }
-            }
-        },
-        users: [
-           { username: "adam_hammond@uk.ibm.com",permissions: ["*"]}
-        ]
-    },
-    */
-    
+    //adminAuth: {
+    //    type: "credentials",
+    //    users: [{
+    //        username: 'username',
+    //        password: 'password',
+    //        permissions: "*"
+    //    }]
+    //},
 
     // To password protect the node-defined HTTP endpoints (httpNodeRoot), or
     // the static content (httpStatic), the following properties can be used.
@@ -187,18 +152,6 @@ var settings = {
     // See http://nodered.org/docs/security.html#generating-the-password-hash
     //httpNodeAuth: {user:"user",pass:"$2a$08$zZWtXTja0fB1pzD4sHCMyOCMYz2Z6dNbM6tl8sJogENOMcxWV9DN."},
     //httpStaticAuth: {user:"user",pass:"$2a$08$zZWtXTja0fB1pzD4sHCMyOCMYz2Z6dNbM6tl8sJogENOMcxWV9DN."},
-
-    // To authenticate using OIDC, enable the following:
-    /*oidcAuth: {
-        client_id: process.env.OIDC_CLIENT_ID,
-        client_secret: process.env.OIDC_CLIENT_SECRET,
-        authorization_url: 'https://w3id.alpha.sso.ibm.com/isam/oidc/endpoint/amapp-runtime-oidcidp/authorize',
-        token_url: 'https://w3id.alpha.sso.ibm.com/isam/oidc/endpoint/amapp-runtime-oidcidp/token',
-        issuer_id: 'https://w3id.alpha.sso.ibm.com/isam',
-        callback_url: 'https://nr.dal1a.ciocloud.nonprod.intranet.ibm.com/auth/callback',
-        cert_path: ['/oidc_w3id_staging.cer']
-    },
-    */
 
     // The following property can be used to enable HTTPS
     // See http://nodejs.org/api/https.html#https_https_createserver_options_requestlistener
@@ -279,10 +232,9 @@ var settings = {
     //    global.get("os")
     
     functionGlobalContext: {
-        os: require('os'),
-        _: require('lodash'),
-        moment: require('moment')
-    },
+
+    }
+    ,
     // `global.keys()` returns a list of all properties set in global context.
     // This allows them to be displayed in the Context Sidebar within the editor.
     // In some circumstances it is not desirable to expose them to the editor. The
@@ -291,7 +243,6 @@ var settings = {
     // By default, the property is set to false to avoid accidental exposure of
     // their values. Setting this to true will cause the keys to be listed.
     exportGlobalContextKeys: false,
-
 
     // Context Storage
     // The following property can be used to enable context storage. The configuration
@@ -339,8 +290,20 @@ var settings = {
     }
 };
 
-// Set up Cloudant database if it exists
+// Set up adminAuth if user name and password set
+if (process.env.NODE_RED_USERNAME) {
+    settings.adminAuth = {
+        type: "credentials",
+        users: [{
+            username: process.env.NODE_RED_USERNAME,
+            password: process.env.NODE_RED_PASSWORD,
+            permissions: "*"
+        }]
+    }
+}
 
+
+// Set up Cloudant database if it exists
 if (process.env.NODE_RED_STORAGE_URL) {
     // Set the Cloudant storage module settings
     settings.cloudantService = {
@@ -354,7 +317,7 @@ if (process.env.NODE_RED_STORAGE_URL) {
         prefix: process.env.NODE_RED_STORAGE_APP_NAME || "nr"
     }
 
-    util.log(`Using Cloudant service: ${settings.cloudantService.name} (DB: ${settings.cloudantService.db} Prefix: ${settings.cloudantService.prefix})`);
+    util.log(`Using Cloudant service - (DB: ${settings.cloudantService.db} Prefix: ${settings.cloudantService.prefix})`);
     settings.storageModule = require("./cloudantStorage");
 } else {
     // No suitable service has been found. Fall back to localfilesystem storage

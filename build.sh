@@ -4,7 +4,7 @@
 docker container rm nr
 
 # Remove image
-docker image rm node-red-cirrus:0.1
+docker image rm node-red-docker-cloudant:0.1
 
 # Build new image
-docker build -t node-red-cirrus:0.1 .
+docker build -t node-red-docker-cloudant:0.1 .
