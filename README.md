@@ -1,4 +1,4 @@
-### Node-RED on Docker/Openshift with optional Cloudant/CouchDB filestore
+## Node-RED on Docker/Openshift with optional Cloudant/CouchDB filestore
 
 This repository is an example Node-RED application that can be deployed into
 a Red Hat Openshift environment (or other Docker environments) with only a couple clicks.
