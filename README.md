@@ -1,12 +1,12 @@
-## Node-RED on Docker/Openshift with optional Cloudant/CouchDB filestore
+# Node-RED on Docker/Openshift with optional Cloudant/CouchDB filestore
 
 This repository is an example Node-RED application that can be deployed into
 a Red Hat Openshift environment (or other Docker environments) with only a couple clicks.
 
-### Using Cloudant or CouchDB database as your file store
+## Using Cloudant or CouchDB database as your file store
 
 By default, this uses a local filestore at `/data` which should be mounted as persistent
-storage. Alternatively you can use Cloudant as your filestore by setting the full URL of a Cloudant/CouchDB instance in a 
+storage. Alternatively you can use Cloudant or CouchDB as your filestore by setting the full URL of a Cloudant/CouchDB instance in a 
 Secrets file (Openshift) or environment variables (Docker).
 
 - Create a new Cloudant/CouchDB instance and create a set of credentials
@@ -19,7 +19,7 @@ Secrets file (Openshift) or environment variables (Docker).
 It includes a set of default flows that are automatically deployed the first time
 Node-RED runs.
 
-### Customising Node-RED
+## Customising Node-RED
 
 This repository is here to be cloned, modified and re-used to allow anyone create
 their own Node-RED based application that can be quickly deployed to IBM Cloud.
@@ -36,7 +36,7 @@ Additional nodes can be added to the `package.json` file and all other Node-RED
 configuration settings can be set in `cirrus-settings.js`.
 
 
-### Environment Variables
+## Environment Variables
 
 The following environment variables can be set in the Secrets file to configure the application:
 
