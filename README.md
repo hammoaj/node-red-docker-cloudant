@@ -11,9 +11,10 @@ Secrets file (Openshift) or environment variables (Docker).
 
 - Create a new Cloudant/CouchDB instance and create a set of credentials
 - If you are using Cloudant, there will be an entry for *url*, make a note of the full URL. For CouchDB use the URL of your instance with the user name and password you have set up.
-- In Openshift, click on the *Secrets* tab and add a new secret to the file you created earlier:
-   Secret name: `NODE_RED_STORAGE_URL`
-   Secret value: URL from the Cloudant credentials file
+- In Openshift, add a new secret:
+   * Secret name: `NODE_RED_STORAGE_URL`
+   * Secret value: URL from the Cloudant credentials file
+- In Docker, set this as an environment variable on the Docker run command: `-e NODE_RED_STORAGE=<url>`
 - Redeploy the application
 
 It includes a set of default flows that are automatically deployed the first time
@@ -22,7 +23,8 @@ Node-RED runs.
 ## Customising Node-RED
 
 This repository is here to be cloned, modified and re-used to allow anyone create
-their own Node-RED based application that can be quickly deployed to IBM Cloud.
+their own Node-RED based application that can be quickly deployed to IBM Cloud or other Openshift
+environments.
 
 The default flows are stored in the `defaults` directory in the file called `flow.json`.
 When the application is first started, this flow is copied to the attached Cloudant
@@ -33,7 +35,7 @@ The web content you get when you go to the application's URL is stored under the
 `public` directory.
 
 Additional nodes can be added to the `package.json` file and all other Node-RED
-configuration settings can be set in `cirrus-settings.js`.
+configuration settings can be set in `docker-settings.js`.
 
 
 ## Environment Variables
