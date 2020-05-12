@@ -13,8 +13,8 @@ Secrets file (Openshift) or environment variables (Docker).
 - If you are using Cloudant, there will be an entry for *url*, make a note of the full URL. For CouchDB use the URL of your instance with the user name and password you have set up.
 - In Openshift, add a new secret:
    * Secret name: `NODE_RED_STORAGE_URL`
-   * Secret value: URL from the Cloudant credentials file
-- In Docker, set this as an environment variable on the Docker run command: `-e NODE_RED_STORAGE=<url>`
+   * Secret value: URL from the Cloudant credentials file or CouchDB URL
+- In Docker, set this as an environment variable on the Docker run command: `-e NODE_RED_STORAGE_URL=<url>`
 - Redeploy the application
 
 It includes a set of default flows that are automatically deployed the first time
