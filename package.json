@@ -1,0 +1,39 @@
+{
+    "name": "node-red-docker-cloudant",
+    "version": "0.0.1",
+    "description": "Dockerised Node-RED for Openshift with optional Cloudant filestore",
+    "homepage": "http://nodered.org",
+    "license": "Apache-2.0",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/hammoaj/node-red-docker-cloudant"
+    },
+    "main": "node_modules/node-red/red/red.js",
+    "scripts": {
+        "start": "node $NODE_OPTIONS node_modules/node-red/red.js $FLOWS"
+    },
+    "dependencies": {
+        "node-red": "^1.0.4",
+        "@cloudant/cloudant": "^4.2.2"  
+    },
+    "contributors": [
+        {
+            "name": "Dave Conway-Jones"
+        },
+        {
+            "name": "Nick O'Leary"
+        },
+        {
+            "name": "James Thomas"
+        },
+        {
+            "name": "Raymond Mouthaan"
+        },
+        {
+            "name": "Adam Hammond"
+        }
+    ],
+    "engines": {
+        "node": ">=10"
+    }
+}
