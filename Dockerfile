@@ -1,4 +1,4 @@
-FROM nodered/node-red-dev:test-12
+FROM nodered/node-red
 
 COPY package.json ./
 
