@@ -1,6 +1,6 @@
 {
     "name": "node-red-docker-cloudant",
-    "version": "0.0.1",
+    "version": "1.0.0",
     "description": "Dockerised Node-RED for Openshift with optional Cloudant filestore",
     "homepage": "http://nodered.org",
     "license": "Apache-2.0",
@@ -13,7 +13,7 @@
         "start": "node $NODE_OPTIONS node_modules/node-red/red.js $FLOWS"
     },
     "dependencies": {
-        "node-red": "^1.0.4",
+        "node-red": "^1.x.x",
         "@cloudant/cloudant": "^4.2.2"  
     },
     "contributors": [
